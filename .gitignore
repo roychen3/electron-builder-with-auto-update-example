@@ -1,4 +1,8 @@
 node_modules
 
+# electron app
 dist
 pkg
+
+# electron update server
+electron-update-server/public/release

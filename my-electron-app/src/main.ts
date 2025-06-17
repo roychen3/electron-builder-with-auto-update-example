@@ -1,6 +1,11 @@
 import { app, BrowserWindow } from 'electron';
 
 import { getAppUiPath } from './pathResolver';
+import { initialAutoUpdate } from './auto-update';
+import { createAppMenu } from './menu';
+
+initialAutoUpdate();
+createAppMenu();
 
 const createWindow = () => {
   const win = new BrowserWindow({

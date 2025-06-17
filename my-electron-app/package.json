@@ -16,6 +16,9 @@
   "author": "Roy Chen",
   "license": "ISC",
   "description": "A sample Electron app built with electron-builder.",
+  "dependencies": {
+    "electron-updater": "^6.6.2"
+  },
   "devDependencies": {
     "@types/node": "^24.0.3",
     "electron": "36.4.0",
@@ -29,6 +32,10 @@
       "name": "MyElectronApp"
     },
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "publish": {
+      "provider": "generic",
+      "url": "http://localhost:8080/release/"
+    },
     "directories": {
       "output": "pkg"
     },
