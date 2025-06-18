@@ -4,5 +4,10 @@ node_modules
 dist
 pkg
 
+## mac code signing
+package-mac-signed.sh
+*.p12
+*.pfx
+
 # electron update server
 electron-update-server/public/release
