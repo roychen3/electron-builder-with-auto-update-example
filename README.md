@@ -4,7 +4,7 @@ This repository demonstrates how to implement auto-update functionality in an El
 
 ## Project Structure
 
-- **updater server**: A local update server using Docker and Nginx to simulate a real-world environment for hosting app resources.
+- **electron-update-server**: A local update server using Docker and Nginx to simulate a real-world environment for hosting app resources.
 - **my-electron-app**: A simple Electron project using `electron-builder` as a code example for implementing auto update functionality.
 
 ---
@@ -43,32 +43,41 @@ cp scripts/package-mac-signed.sh.example scripts/package-mac-signed.sh
 1. Set the version in `my-electron-app/package.json` to `1.0.0`.
 2. Run the packaging script:
 
-    ```bash
-    bash scripts/package-mac-signed.sh
-    ```
+    - **macOS (with code signing):**
+      ```bash
+      bash scripts/package-mac-signed.sh
+      ```
+    - **Windows (without code signing):**
+      ```bash
+      npm run package # If you encounter permission issues, please run as administrator
+      ```
 
 3. Install the generated `v1.0.0` application.
 
 ### 2.2 Prepare the Update
 
-1. Update the version in `my-electron-app/package.json` to `2.0.0`.
-2. Run the packaging script again:
+1. Update version in `my-electron-app/package.json` to `2.0.0`.
+2. Repeat packaging as above.
+3. Copy the following files from `my-electron-app/pkg` to `electron-update-server/public/release`:
 
-    ```bash
-    bash scripts/package-mac-signed.sh
-    ```
-
-3. After packaging, copy the following files from `my-electron-app/pkg` to `electron-update-server/public/release` (ensure the version in the filenames matches your `package.json`):
-
-    ```
-    builder-debug.yml 
-    builder-effective-config.yaml 
-    latest-mac.yml 
-    MyElectronApp-2.0.0-mac-arm64.dmg 
-    MyElectronApp-2.0.0-mac-arm64.dmg.blockmap 
-    MyElectronApp-2.0.0-mac-arm64.zip 
-    MyElectronApp-2.0.0-mac-arm64.zip.blockmap
-    ```
+    - **macOS:**
+      ```
+      builder-debug.yml
+      builder-effective-config.yaml
+      latest-mac.yml
+      MyElectronApp-2.0.0-mac-arm64.dmg
+      MyElectronApp-2.0.0-mac-arm64.dmg.blockmap
+      MyElectronApp-2.0.0-mac-arm64.zip
+      MyElectronApp-2.0.0-mac-arm64.zip.blockmap
+      ```
+    - **Windows:**
+      ```
+      builder-debug.yml
+      builder-effective-config.yaml
+      latest.yml
+      MyElectronApp-2.0.0-win-x64.exe
+      MyElectronApp-2.0.0-win-x64.exe.blockmap
+      ```
 
 ---
 
